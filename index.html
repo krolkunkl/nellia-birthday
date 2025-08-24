@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С Днем Рождения, Нелли! 🎉</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pixelify+Sans:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            /* МЕСТО ДЛЯ ВАШЕГО ФОНОВОГО ИЗОБРАЖЕНИЯ */
+            /* Раскомментируйте и замените на ваш Imgur код: */
+            /* background: url('https://i.imgur.com/ВАШ_КОД_ФОНА.png') center center / cover no-repeat, */
+            
+            /* Основной градиент (можно оставить как fallback или удалить) */
+            background: linear-gradient(135deg, #000000 0%, #1a0000 50%, #330000 100%);
+            
+            color: white;
+            font-family: 'Pixelify Sans', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(45deg, #000000, #2d0000);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .neon-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 3rem;
+            font-weight: 400;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 15px #fff,
+                0 0 20px #ffaa00,
+                0 0 35px #ffaa00,
+                0 0 40px #ffaa00;
+            animation: neonFlicker 2s ease-in-out infinite alternate;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes neonFlicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                text-shadow: 
+                    0 0 5px #fff,
+                    0 0 10px #fff,
+                    0 0 15px #fff,
+                    0 0 20px #ffaa00,
+                    0 0 35px #ffaa00,
+                    0 0 40px #ffaa00;
+            }
+            20%, 24%, 55% {
+                text-shadow: 
+                    0 0 5px #fff,
+                    0 0 10px #fff,
+                    0 0 15px #fff;
+            }
+        }
+        
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .congratulations-text {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(51, 0, 0, 0.8));
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+        
+        .congratulations-text h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ffaa00;
+        }
+        
+        .congratulations-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: center;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+        
+        .arts-section {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(51, 0, 0, 0.8));
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+        
+        .arts-intro {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 170, 0, 0.3);
+        }
+        
+        .arts-intro h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #ffaa00;
+        }
+        
+        .arts-intro p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            opacity: 0.95;
+            margin-bottom: 15px;
+        }
+        
+        .gallery-container {
+            text-align: center;
+        }
+        
+        .art-display {
+            margin-bottom: 30px;
+        }
+        
+        .art-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #1a1a1a, #333);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .art-image:hover {
+            border-color: rgba(255, 170, 0, 0.5);
+            box-shadow: 0 5px 15px rgba(255, 170, 0, 0.2);
+        }
+        
+        .art-image img {
+            transition: transform 0.3s ease;
+        }
+        
+        .art-image:hover img {
+            transform: scale(1.02);
+        }
+        
+        /* Модальное окно для увеличения */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 20px;
+            width: 90%;
+            height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(255, 170, 0, 0.3);
+            animation: zoomIn 0.3s ease;
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #ffaa00;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        .close:hover {
+            color: #ff8800;
+            transform: scale(1.1);
+        }
+        
+        .modal-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffaa00;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 170, 0, 0.3);
+            display: none;
+        }
+        
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #ffaa00, #ff8800);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Press Start 2P', cursive;
+            display: none;
+        }
+        
+        .modal-nav:hover {
+            background: linear-gradient(135deg, #ff8800, #ff6600);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .modal-prev {
+            left: 20px;
+        }
+        
+        .modal-next {
+            right: 20px;
+        }
+        
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .zoom-hint {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(255, 170, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-family: 'Pixelify Sans', monospace;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            display: none;
+        }
+        
+        .art-image:hover .zoom-hint {
+            opacity: 0;
+        }
+        
+        .art-placeholder::before {
+            content: '🎨';
+            font-size: 4rem;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #ffaa00, #ff8800);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            font-family: 'Pixelify Sans', monospace;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(255, 170, 0, 0.3);
+        }
+        
+        .download-btn:hover {
+            background: linear-gradient(135deg, #ff8800, #ff6600);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 170, 0, 0.4);
+        }
+        
+        .art-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #ffaa00, #ff8800);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 2rem;
+            font-weight: bold;
+            font-family: 'Pixelify Sans', monospace;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 170, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #ff8800, #ff6600);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 170, 0, 0.4);
+        }
+        
+        .counter {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            color: #ffaa00;
+            min-width: 80px;
+        }
+        
+        .ending-section {
+            background: linear-gradient(135deg, rgba(255, 170, 0, 0.1), rgba(255, 136, 0, 0.1));
+            border: 2px solid rgba(255, 170, 0, 0.3);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .ending-section h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #ffaa00;
+        }
+        
+        .ending-section p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        .sparkles {
+            position: fixed;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkle 4s linear infinite;
+        }
+        
+        @keyframes sparkle {
+            0% { opacity: 0; transform: translateY(0px) rotate(0deg); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-100px) rotate(180deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .neon-title {
+                font-size: 1.8rem;
+                line-height: 1.3;
+                margin-bottom: 15px;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+                margin-top: 10px;
+            }
+            
+            .header {
+                padding: 40px 15px;
+            }
+            
+            .content-section {
+                padding: 30px 15px;
+            }
+            
+            .congratulations-text {
+                padding: 25px 20px;
+                margin-bottom: 30px;
+            }
+            
+            .congratulations-text h2 {
+                font-size: 1.5rem;
+                line-height: 1.4;
+                margin-bottom: 15px;
+            }
+            
+            .congratulations-text p {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                margin-bottom: 12px;
+            }
+            
+            .arts-section {
+                padding: 25px 20px;
+            }
+            
+            .arts-intro h2 {
+                font-size: 1.2rem;
+                line-height: 1.4;
+                margin-bottom: 15px;
+            }
+            
+            .arts-intro p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .art-image {
+                height: 250px;
+                margin: 15px 0;
+            }
+            
+            .download-btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .art-description {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+            
+            .nav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .modal-nav {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+                display: none;
+            }
+            
+            .modal-counter {
+                font-size: 1rem;
+                padding: 8px 15px;
+                display: none;
+            }
+            
+            .close {
+                font-size: 30px;
+                top: 15px;
+                right: 25px;
+            }
+            
+            .ending-section {
+                padding: 30px 20px;
+                margin-top: 40px;
+            }
+            
+            .ending-section h2 {
+                font-size: 1.4rem;
+                line-height: 1.4;
+                margin-bottom: 15px;
+            }
+            
+            .ending-section p {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                margin-bottom: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .neon-title {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .header {
+                padding: 30px 10px;
+            }
+            
+            .content-section {
+                padding: 20px 10px;
+            }
+            
+            .congratulations-text {
+                padding: 20px 15px;
+            }
+            
+            .congratulations-text h2 {
+                font-size: 1.3rem;
+            }
+            
+            .congratulations-text p {
+                font-size: 1rem;
+            }
+            
+            .arts-section {
+                padding: 20px 15px;
+            }
+            
+            .arts-intro h2 {
+                font-size: 1.1rem;
+            }
+            
+            .arts-intro p {
+                font-size: 0.95rem;
+            }
+            
+            .art-image {
+                height: 200px;
+            }
+            
+            .download-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .art-description {
+                font-size: 0.9rem;
+            }
+            
+            .nav-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+            
+            .ending-section {
+                padding: 25px 15px;
+            }
+            
+            .ending-section h2 {
+                font-size: 1.2rem;
+            }
+            
+            .ending-section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkles" id="sparkles"></div>
+    
+    <header class="header">
+        <h1 class="neon-title">[Главный заголовок]</h1>
+        <p class="subtitle">[Подзаголовок]</p>
+    </header>
+    
+    <div class="content-section">
+        <div class="congratulations-text">
+            <h2>[Заголовок поздравления]</h2>
+            <p>[Основной поздравительный текст - строка 1]</p>
+            <p>[Основной поздравительный текст - строка 2]</p>
+            <p>[Основной поздравительный текст - строка 3]</p>
+            <p>[Основной поздравительный текст - строка 4]</p>
+        </div>
+        
+        <div class="arts-section">
+            <div class="arts-intro">
+                <h2>[Заголовок секции артов]</h2>
+                <p>[Вводный текст про арты - строка 1]</p>
+                <p>[Вводный текст про арты - строка 2]</p>
+                <p>[Вводный текст про арты - строка 3]</p>
+            </div>
+            
+            <div class="gallery-container">
+                <div class="art-display">
+                    <!-- Ваши изображения теперь загружаются автоматически -->
+                    <div class="art-image" id="artImage" onclick="openModal()"></div>
+                    
+                    <button class="download-btn" id="downloadBtn" onclick="downloadCurrentArt()">📥 Скачать арт #1 (.png)</button>
+                    
+                    <div class="art-description" id="artDescription">
+                        [Описание арта #1]
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <button class="nav-btn" onclick="previousArt()">‹</button>
+                    <div class="counter">
+                        <span id="currentNumber">1</span> / 6
+                    </div>
+                    <button class="nav-btn" onclick="nextArt()">›</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-section">
+        <div class="ending-section">
+            <h2>[Заголовок финального блока]</h2>
+            <p>[Финальные пожелания - строка 1]</p>
+            <p>[Финальные пожелания - строка 2]</p>
+            <p>[Финальные пожелания - строка 3]</p>
+        </div>
+    </div>
+    
+    <!-- Модальное окно для увеличения изображений -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-image" id="modalImage" alt="Увеличенный арт">
+        </div>
+    </div>
+
+    <script>
+        let currentArt = 1;
+        
+        // Массив с данными артов
+        const artsData = [
+            {
+                image: "https://i.ibb.co/VcSP8s2t/126.png",
+                description: "[Описание арта #1]"
+            },
+            {
+                image: "https://i.ibb.co/VY6jt0h8/4-NELLY.png", 
+                description: "[Описание арта #2]"
+            },
+            {
+                image: "https://i.ibb.co/Wv0Cbvcd/124.png",
+                description: "[Описание арта #3]"
+            },
+            {
+                image: "https://i.ibb.co/HT3cN1rK/128.png",
+                description: "[Описание арта #4]"
+            },
+            {
+                image: "https://i.ibb.co/7JDr83wW/127.png",
+                description: "[Описание арта #5]"
+            },
+            {
+                image: "https://i.ibb.co/pj2Nf8LT/Screenshot-20250822-192213-Gacha-Life.jpg",
+                description: "[Описание арта #6]"
+            }
+        ];
+        
+        function updateArt() {
+            const artImage = document.getElementById('artImage');
+            const artDescription = document.getElementById('artDescription');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const currentNumber = document.getElementById('currentNumber');
+            
+            // Обновляем изображение
+            artImage.innerHTML = `<img src="${artsData[currentArt - 1].image}" alt="Арт #${currentArt}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">`;
+            
+            // Обновляем описание
+            artDescription.textContent = artsData[currentArt - 1].description;
+            
+            // Обновляем кнопку скачивания
+            downloadBtn.textContent = `📥 Скачать арт #${currentArt} (.png)`;
+            downloadBtn.onclick = () => downloadArt(currentArt);
+            
+            // Обновляем счетчик
+            currentNumber.textContent = currentArt;
+        }
+        
+        function nextArt() {
+            currentArt = currentArt === 6 ? 1 : currentArt + 1;
+            updateArt();
+        }
+        
+        function previousArt() {
+            currentArt = currentArt === 1 ? 6 : currentArt - 1;
+            updateArt();
+        }
+        
+        function downloadCurrentArt() {
+            downloadArt(currentArt);
+        }
+        
+        // Функции модального окна
+        function openModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            
+            modal.style.display = 'block';
+            modalImage.src = artsData[currentArt - 1].image;
+            
+            // Блокируем скролл страницы
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+            
+            // Восстанавливаем скролл страницы
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Закрытие модального окна по клику вне изображения
+        document.getElementById('imageModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeModal();
+            }
+        });
+        
+        // Закрытие модального окна по ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+        
+        // Функция для скачивания арта (заглушка)
+        function downloadArt(artNumber) {
+            // Создаем canvas для генерации заглушки изображения
+            const canvas = document.createElement('canvas');
+            canvas.width = 800;
+            canvas.height = 600;
+            const ctx = canvas.getContext('2d');
+            
+            // Создаем градиентный фон
+            const gradient = ctx.createLinearGradient(0, 0, 800, 600);
+            gradient.addColorStop(0, '#ff6b6b');
+            gradient.addColorStop(0.5, '#d63384');
+            gradient.addColorStop(1, '#000000');
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 800, 600);
+            
+            // Добавляем текст
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 40px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(`Арт для Нелли #${artNumber}`, 400, 250);
+            
+            ctx.font = '30px Arial';
+            ctx.fillText('С Днем Рождения!', 400, 300);
+            
+            ctx.font = '24px Arial';
+            ctx.fillText('16 лет - это прекрасно! ✨', 400, 350);
+            
+            // Конвертируем в blob и скачиваем
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `nelly_birthday_art_${artNumber}.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+        }
+        
+        // Функция для создания искорок
+        function createSparkles() {
+            const sparklesContainer = document.getElementById('sparkles');
+            
+            setInterval(() => {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 4 + 's';
+                sparkle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                sparklesContainer.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 4000);
+            }, 300);
+        }
+        
+        // Поддержка стрелок на клавиатуре
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                previousArt();
+            } else if (event.key === 'ArrowRight') {
+                nextArt();
+            }
+        });
+        
+        // Запускаем создание искорок
+        createSparkles();
+        
+        // Инициализируем первый арт
+        updateArt();
+    </script>
+</body>
+</html>
