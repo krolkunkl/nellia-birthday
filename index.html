@@ -653,7 +653,34 @@
         0% { transform: translateY(-10px); opacity: 1; }
         100% { transform: translateY(100vh); opacity: 0; }
     }
+/* === Глобальное уменьшение текста (кроме заголовков) === */
+/* Меняй коэффициент, если нужно (0.9 = 90% от прежнего размера) */
+:root {
+  --copy-downscale: 0.9;
+}
 
+/* Подзаголовки и обычный текст */
+.subtitle                { font-size: calc(1.2rem * var(--copy-downscale)) !important; }
+.congratulations-text p  { font-size: calc(0.9rem * var(--copy-downscale)) !important; }
+.arts-intro p            { font-size: calc(0.8rem * var(--copy-downscale)) !important; }
+.art-description         { font-size: calc(0.8rem * var(--copy-downscale)) !important; }
+.ending-section p        { font-size: calc(0.9rem * var(--copy-downscale)) !important; }
+
+/* Элементы интерфейса с текстом */
+.download-btn            { font-size: calc(0.8rem * var(--copy-downscale)) !important; }
+.counter                 { font-size: calc(1rem   * var(--copy-downscale)) !important; }
+.nav-btn                 { font-size: calc(1.5rem * var(--copy-downscale)) !important; } /* стрелки ‹ › */
+.zoom-hint               { font-size: calc(0.8rem * var(--copy-downscale)) !important; }
+.modal-counter           { font-size: calc(1.2rem * var(--copy-downscale)) !important; }
+
+/* На планшетах/телефонах уменьшаем чуть сильнее, чтобы сохранить иерархию */
+@media (max-width: 768px) {
+  :root { --copy-downscale: 0.88; }
+}
+@media (max-width: 480px) {
+  :root { --copy-downscale: 0.86; }
+}
+/* КОНЕЦ. */
     </style>
 </head>
 <body>
@@ -832,14 +859,63 @@
             }
         });
         
-        // Функция для скачивания арта (заглушка)
-        function downloadArt(artNumber) {
-            // Создаем canvas для генерации заглушки изображения
-            const canvas = document.createElement('canvas');
-            canvas.width = 800;
-            canvas.height = 600;
-            const ctx = canvas.getContext('2d');
-            
+// функция downloadArt
+
+function extFromMime(mime) {
+  const map = {
+    'image/png': '.png',
+    'image/jpeg': '.jpg',
+    'image/webp': '.webp',
+    'image/gif': '.gif',
+    'image/svg+xml': '.svg'
+  };
+  return map[mime] || '';
+}
+
+function extFromUrl(url) {
+  try {
+    const pathname = new URL(url).pathname;
+    const m = pathname.match(/\.(png|jpe?g|webp|gif|svg)$/i);
+    return m ? ('.' + m[1].toLowerCase().replace('jpeg', 'jpg')) : '';
+  } catch {
+    const m = url.match(/\.(png|jpe?g|webp|gif|svg)(\?|#|$)/i);
+    return m ? ('.' + m[1].toLowerCase().replace('jpeg', 'jpg')) : '';
+  }
+}
+
+async function downloadArt(artNumber) {
+  const url = artsData[artNumber - 1].image;
+  const guessedExt = extFromUrl(url) || '';
+  try {
+    const res = await fetch(url, {
+      mode: 'cors',
+      cache: 'no-store',
+      credentials: 'omit',
+      referrerPolicy: 'no-referrer'
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const blob = await res.blob();
+
+    const ext = extFromMime(blob.type) || guessedExt || '.png';
+
+    const blobUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = blobUrl;
+    a.download = `nelly_birthday_art_${artNumber}${ext}`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(blobUrl);
+  } catch (e) {
+    // Запасной план будет открыть изображение в новой вкладке (можно сохранить через "Сохранить как…")... 
+//    const a = document.createElement('a');
+//    a.href = url;
+//    a.target = '_blank';
+//    a.rel = 'noopener';
+//    a.click();
+//  }
+//}
+
             // Создаем градиентный фон
             const gradient = ctx.createLinearGradient(0, 0, 800, 600);
             gradient.addColorStop(0, '#ff6b6b');
