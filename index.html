@@ -675,11 +675,27 @@
             const url = artsData[artNumber - 1].image;
             
             try {
-                const response = await fetch(url);
+                // Пытаемся скачать через fetch
+                const response = await fetch(url, {
+                    mode: 'cors',
+                    cache: 'no-store'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
                 const blob = await response.blob();
                 
+                // Определяем расширение по типу файла или URL
                 let extension = '.png';
-                if (url.includes('.jpg') || url.includes('.jpeg')) {
+                if (blob.type === 'image/jpeg') {
+                    extension = '.jpg';
+                } else if (blob.type === 'image/gif') {
+                    extension = '.gif';
+                } else if (blob.type === 'image/webp') {
+                    extension = '.webp';
+                } else if (url.includes('.jpg') || url.includes('.jpeg')) {
                     extension = '.jpg';
                 } else if (url.includes('.gif')) {
                     extension = '.gif';
@@ -696,8 +712,43 @@
                 document.body.removeChild(a);
                 URL.revokeObjectURL(downloadUrl);
                 
+                console.log(`Арт #${artNumber} скачан успешно`);
+                
             } catch (error) {
-                window.open(url, '_blank');
+                console.warn('Прямое скачивание не сработало, открываю в новой вкладке:', error);
+                
+                // Запасной вариант - создаем прокси-ссылку
+                try {
+                    const proxyUrl = `https://cors-anywhere.herokuapp.com/${url}`;
+                    const response = await fetch(proxyUrl);
+                    
+                    if (response.ok) {
+                        const blob = await response.blob();
+                        const downloadUrl = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = downloadUrl;
+                        a.download = `nelly_birthday_art_${artNumber}.png`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(downloadUrl);
+                        
+                        console.log(`Арт #${artNumber} скачан через прокси`);
+                    } else {
+                        throw new Error('Прокси не помог');
+                    }
+                } catch (proxyError) {
+                    console.warn('И прокси не помог, открываю в браузере:', proxyError);
+                    
+                    // Финальный запасной вариант
+                    const newWindow = window.open(url, '_blank');
+                    if (newWindow) {
+                        newWindow.focus();
+                        alert(`Арт открыт в новой вкладке. Сохраните его через правый клик → "Сохранить изображение как..."`);
+                    } else {
+                        alert(`Не удалось открыть изображение. Скопируйте эту ссылку и откройте в браузере:\n${url}`);
+                    }
+                }
             }
         }
         
